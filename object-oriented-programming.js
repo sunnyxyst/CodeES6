@@ -18,6 +18,6 @@ class Apple {
     }
 }
 // 호출방식인 new Apple로 정보가 전달되면 생성자 함수가 실행된다.
-const myApple = new Apple('빨강', 150);
+const myApple = new Apple('빨강', 150); // 인스턴스(객체)화
 myApple.peel();
 myApple.eat();
