@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		* {margin: 0; padding: 0; font-size: 10px; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;}
+		a {text-decoration: none; font-size: 1.4rem; color:dodgerblue;}
+		html, body {height: 100%;}
+		.container {height: 100%; display: block;}
+		.content {height: 100%; overflow-y: auto;}
+		.top-content {font-size: 5rem; min-height: 100vh; background-color:aliceblue; padding: 1rem;}
+		.anchor-nav {display: none; position: relative; overflow: hidden;}
+		.anchor-nav.on {display: flex;}
+		.anchor-list {display: flex; list-style: none;}
+		.anchor-item {flex: 0 0 auto;}
+		.anchor-item a{display: block; padding: .5rem 1.6rem; border-radius: 1.4rem;}
+		.anchor-item.active a{background-color:cadetblue; color: #fff;}
+		.more {position: absolute; right: 0; top: 0; background-color: #fff;height: 100%; border: none; padding: 1rem 2rem;}
+		.section {font-size: 4rem;display: flex; align-items: center; justify-content: center; min-height: 50rem;}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="content">
+			<div class="top-content">dummy Top Area</div>
+			<nav class="anchor-nav">
+				<ul class="anchor-list">
+					<li class="anchor-item active"><a href="#">nav1 - firstNav</a></li>
+					<li class="anchor-item"><a href="#">nav2</a></li>
+					<li class="anchor-item"><a href="#">nav3 - third-Nav</a></li>
+					<li class="anchor-item"><a href="#">nav4</a></li>
+					<li class="anchor-item"><a href="#">nav5</a></li>
+					<li class="anchor-item"><a href="#">nav6 - lastNav</a></li>
+				</ul>
+				<button type="button" class="more">+</button>
+			</nav>
+			<div class="section anchor" style="background-color:beige">anchor section1</div>
+			<div class="section anchor" style="background-color:aqua">anchor section2</div>
+			<div class="section anchor" style="background-color:cornsilk">anchor section3</div>
+			<div class="section anchor" style="background-color:darkgrey">anchor section4</div>
+			<div class="section anchor" style="background-color:burlywood">anchor section5</div>
+		</div>
+	</div>
+	<script src="anchor-scroll-prototype.js"></script>
+	<script>
+		const anchorInit = new AnchorScrollNav({
+			anchorSection: '.section.anchor',
+			scrollArea: document.querySelector('.content'),
+			expanderBtn: '.more'
+		})
+	</script>
+</body>
+</html>
