@@ -12,7 +12,7 @@ function AnchorScrollNav(options) {
 	this.scrollPos = 0; // scroll Position
 
 	this.scrollHandler = this.handleScroll.bind(this);
-	this.moreBtnHandler = null;
+	this.moreBtnHandler = this.toggleMore.bind(this);
 
 	this.items = this.anchorContainer.querySelectorAll('.anchor-item');
 	this.list = this.anchorContainer.querySelector('.anchor-list');
@@ -21,28 +21,17 @@ function AnchorScrollNav(options) {
 }
 
 AnchorScrollNav.prototype.init = function() {
-	//var self = this;
-	// var expandBtn = document.querySelector(this.expanderBtn);
-	// if(expandBtn) {
-	// 	expandBtn.addEventListener('click', function(e) {
-	// 		if(self.anchorContainer.classList.add('-active')) {
-	// 			self.anchorContainer.classList.remove('-acitve');
-	// 			var activeItem = self.anchorContainer.querySelector('.item.-active');
-	// 			var firstItem = self.anchorContainer.querySelector('.item');
-	// 			if(activeItem && firstItem) {
-	// 				self.list.scrollLeft = activeItem.getBoundingClientRect().left - firstItem.getBoundingClientRect().left;
-	// 			}
-	// 		} else {
-	// 			self.anchorContainer.classList.add('-active');
-	// 		}
-	// 	});
-	// }
+	const expandBtn = document.querySelector(this.expanderBtn);
+	if(expandBtn) {
+		expandBtn.addEventListener('click', this.expanderHandler);
+	}
 	this.recalcOffsets();
 	this.scrollArea.addEventListener('scroll', this.scrollHandler);
 }
 
 AnchorScrollNav.prototype.recalcOffsets = function() {
 	this.secOffsetTopArr = [];
+	this.secOffsetLeftArr = [];
 	// offsetTopArray 
 	var anchorSecs = document.querySelectorAll(this.anchorSection);
 	for(var i=0; i < anchorSecs.length; i ++) {
@@ -67,24 +56,61 @@ AnchorScrollNav.prototype.handleScroll = function() {
 	} else {
 		this.anchorContainer.classList.remove('on');
 	}
-
 	// current Index of top Pos Array <= screen top + anchorWrap top
-	// if(this.secOffsetTopArr[this.offsetIndex] <= scrollTop + this.upperHeight) {
-	// 	this.increaseIndex();
-	// } 
+	if(this.secOffsetTopArr[this.offsetIndex] <= scrollTop + this.upperHeight) {
+		this.increaseIndex();
+	} 
 
-	// if(scrollTop + this.upperHeight < this.secOffsetTopArr[this.offsetIndex]) {
-	// 	this.decreaseIndex();
-	// }
-
-	//this.scrollX();
+	if(scrollTop + this.upperHeight < this.secOffsetTopArr[this.offsetIndex]) {
+		this.decreaseIndex();
+	}
+	console.log(this.secOffsetTopArr[this.offsetIndex])
+	this.scrollX();
 }
 
-// AnchorScrollNav.prototype.scrollX = function() {
-// 	if(this.offsetIndex !== this.offsetIndexHistory) {
-// 		for(var i=0; i < this.items.length; i++) {
-// 			this.items[i].classList.remove('-active');
-// 		}
-// 	}
-// }
+AnchorScrollNav.prototype.scrollX = function() {
+	if(this.offsetIndex !== this.offsetIndexHistory) {
+		this.items.forEach(function(item) {
+			item.classList.remove('active');
+		})
+		const activeItem = this.items[this.offsetIndex];
+		if(activeItem) {
+			activeItem.classList.add('active');
+			const activeLeft = activeItem.getBoundingClientRect().left + window.scrollX;
+			const firstLeft = this.items[0].getBoundingClientRect().left + window.scrollX;
+			this.list.scrollLeft = activeLeft - firstLeft;
+			this.scrollPos = this.secOffsetLeftArr[this.offsetIndex];
+			this.offsetIndexHistory = this.offsetIndex;
+		} 	
+	}
+}
 
+AnchorScrollNav.prototype.toggleMore = function() {
+	if(this.container.classList.contains('active')) {
+		this.container.classList.remove('active');
+
+		const activeItem = this.container.querySelector('.item.acitve');
+		const firstItem = this.container.querySelector('.item');
+		if(activeItem && firstItem) {
+			this.list.scrollLeft = activeItem.getBoundingClientRect().left - firstItem.getBoundingClientRect().left;
+		}
+	} else {
+		this.container.classList.add('active');
+	}
+}
+
+AnchorScrollNav.prototype.scrollY = function() {
+
+}
+
+AnchorScrollNav.prototype.increaseIndex = function() {
+	if(this.offsetIndex < this.secOffsetTopArr.length - 1) {
+		this.offsetIndex += 1;
+	}
+}
+
+AnchorScrollNav.prototype.decreaseIndex = function() {
+	if(this.offsetIndex !== 0) {
+		this.offsetIndex -= 1;
+	}
+}

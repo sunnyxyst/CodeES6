@@ -11,9 +11,9 @@
 		.container {height: 100%; display: block;}
 		.content {height: 100%; overflow-y: auto;}
 		.top-content {font-size: 5rem; min-height: 100vh; background-color:aliceblue; padding: 1rem;}
-		.anchor-nav {display: none; position: relative; overflow: hidden;}
-		.anchor-nav.on {display: flex;}
-		.anchor-list {display: flex; list-style: none;}
+		.anchor-nav {display: none; background-color: #fff; padding: .5rem 0; position: relative; overflow: hidden; width: 100%;}
+		.anchor-nav.on {display: flex; position: fixed; top: 0; left: 0;}
+		.anchor-list {display: flex; list-style: none; overflow-x:auto; padding-right: 5rem;}
 		.anchor-item {flex: 0 0 auto;}
 		.anchor-item a{display: block; padding: .5rem 1.6rem; border-radius: 1.4rem;}
 		.anchor-item.active a{background-color:cadetblue; color: #fff;}
@@ -27,20 +27,21 @@
 			<div class="top-content">dummy Top Area</div>
 			<nav class="anchor-nav">
 				<ul class="anchor-list">
-					<li class="anchor-item active"><a href="#">nav1 - firstNav</a></li>
-					<li class="anchor-item"><a href="#">nav2</a></li>
-					<li class="anchor-item"><a href="#">nav3 - third-Nav</a></li>
-					<li class="anchor-item"><a href="#">nav4</a></li>
-					<li class="anchor-item"><a href="#">nav5</a></li>
-					<li class="anchor-item"><a href="#">nav6 - lastNav</a></li>
+					<li class="anchor-item active"><a href="#section1">nav1 - firstNav</a></li>
+					<li class="anchor-item"><a href="#section2">nav2</a></li>
+					<li class="anchor-item"><a href="#section3">nav3 - third-Nav</a></li>
+					<li class="anchor-item"><a href="#section4">nav4</a></li>
+					<li class="anchor-item"><a href="#section5">nav5</a></li>
+					<li class="anchor-item"><a href="#section6">nav6 - lastNav</a></li>
 				</ul>
 				<button type="button" class="more">+</button>
 			</nav>
-			<div class="section anchor" style="background-color:beige">anchor section1</div>
-			<div class="section anchor" style="background-color:aqua">anchor section2</div>
-			<div class="section anchor" style="background-color:cornsilk">anchor section3</div>
-			<div class="section anchor" style="background-color:darkgrey">anchor section4</div>
-			<div class="section anchor" style="background-color:burlywood">anchor section5</div>
+			<div class="section anchor" id="section1" style="background-color:beige">anchor section1</div>
+			<div class="section anchor" id="section2" style="background-color:aqua">anchor section2</div>
+			<div class="section anchor" id="section3" style="background-color:cornsilk">anchor section3</div>
+			<div class="section anchor" id="section4" style="background-color:darkgrey">anchor section4</div>
+			<div class="section anchor" id="section5" style="background-color:burlywood">anchor section5</div>
+			<div class="section anchor" id="section6" style="background-color:darksalmon">anchor section6</div>
 		</div>
 	</div>
 	<script src="anchor-scroll-prototype.js"></script>
